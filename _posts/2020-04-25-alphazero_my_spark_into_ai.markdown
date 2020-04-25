@@ -5,7 +5,7 @@ date:       2020-04-25 11:48:17 -0400
 permalink:  alphazero_my_spark_into_ai
 ---
 
-Like every other kid, I was taught how to play chess and played for fun for most of my young life. I always felt that there was something very honest about the game - unlike most card games where there's a lot of deception and missing information. It wasn't until later in my life that I wanted to get serious about the game and compete in tournaments. 
+Like every other kid, I was taught how to play chess and played for fun for most of my young life. I always felt that there was something very honest about the game, unlike most card games for example where there's a lot of deception and missing information. It wasn't until later in my life that I wanted to get serious about the game and compete in tournaments. 
 My uncle was my mentor - an expert player who started competing after the American chess boom of the 70's inspired by the great Bobby Fischer. Back then, chess was simpler. The methods of learning were 1. Watching the highest-level games and, 2. Reading textbooks written by teams of grandmasters.
 
 In 1997 however, the chess world was shaken up. IBM developed a chess engine, *Deep Blue* which, for the first time, was able to defeat a grandmaster (the world champion and arguably the greatest of all time no less). It became apparent that computers' tactical ability and computing power was too much for even the strongest human to handle...and that was in the late 90's...
