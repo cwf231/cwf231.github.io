@@ -68,8 +68,7 @@ What I wanted to look at next was the **league-leader** and the second-finisher 
 For this, I concatinated a list of dataframes - each one with the top two TPS per year.
 ```
 # Create df of top two TPS per year
-df_lst = [df[df['year'] == year].sort_values('tps', ascending=False).head(2) 
-                 for year in df.year.unique()]
+df_lst = [df[df['year'] == year].sort_values('tps', ascending=False).head(2) for year in df.year.unique()]
 top2_df = pd.concat(df_lst)
 ```
 
