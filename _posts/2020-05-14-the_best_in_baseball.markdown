@@ -73,7 +73,7 @@ df_lst = [df[df['year'] == year].sort_values('tps', ascending=False).head(2) for
 top2_df = pd.concat(df_lst)
 ```
 
-And now we can have a look at the `top2_df`.
+And now we can have a look at `top2_df`.
 
 ```python
 # Plot the difference between the top two TPS per year.
