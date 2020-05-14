@@ -165,6 +165,22 @@ top_dps = df.sort_values('dps').tail(10)
 colors1 = ['b' if x.startswith('koufa') else 'lightgrey' for x in top_tps.playeryear]
 colors2 = ['b' if x.startswith('koufa') else 'lightgrey' for x in top_dps.playeryear]
 
+def label_bars(ax):
+    """Add value labels to the bars (instead of an x-axis)."""
+    
+    # Iterate over the rectangle objects that we've charted.
+    for rect in ax.patches:
+        # Determine the placement of the labels.
+        x_val = rect.get_width()
+        y_val = rect.get_y() + rect.get_height() / 2
+        label = round(rect.get_width() / 10000, 2)
+        
+        # Create annotation
+        ax.annotate(label, (x_val, y_val), xytext=(0, 0), 
+                     textcoords="offset points", 
+                     va='center', ha='right')
+
+# Plot the figure.
 fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(16, 8))
 fig.subplots_adjust(wspace=.3)
 
