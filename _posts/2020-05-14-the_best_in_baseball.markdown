@@ -134,7 +134,6 @@ Now, let's get a sense of the top performers of DPS since 1955.
 ```
 # Sample plot of the top 10 DPS.
 
-plt.style.use('seaborn-talk')
 fig, ax = plt.subplots(figsize=(12,8))
 
 dps_sorted_df = df[df['dps'] > 0].head(10)
