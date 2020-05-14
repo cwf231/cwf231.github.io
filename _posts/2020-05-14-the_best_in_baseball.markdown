@@ -187,12 +187,12 @@ ax2.barh(y='playeryear', width='dps', color=colors2, data=top_dps)
 ax2.set_title('Most Dominant Seasons')
 
 for ax in (ax1, ax2):
+    label_bars(ax)
+
     ax.get_xaxis().set_visible(False)
     
     for spine in ax1.spines:
         ax.spines[spine].set_visible(False)
-		
-		label_bars(ax)
 ```
 
 <img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/koufax.png">
