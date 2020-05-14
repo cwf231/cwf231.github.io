@@ -80,18 +80,15 @@ And now we can have a look at the`top2_df`.
 
 fig, ax = plt.subplots(figsize=(12, 8))
 
-ax = sns.scatterplot(x='year', y='tps', hue='tps', palette='hsv', alpha=1, data=top2_df, ax=ax)
+ax = sns.scatterplot(x='year', y='tps', alpha=1, data=top2_df, ax=ax)
 
-# Plot a line connecting the points on the same year.
 for year in top2_df.year.unique():
     y1 = top2_df[top2_df['year'] == year]['tps'].iloc[0]
     y2 = top2_df[top2_df['year'] == year]['tps'].iloc[1]
     plt.plot([year, year], [y1, y2], c='black', alpha=0.3)
     
 ax.get_yaxis().set_visible(False)
-ax.set_title('Difference In TPS per Year')
-
-ax.legend_.remove()
+ax.set_title('Difference In TPS per Year');
 ```
 
 <img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/tpsdiff.png">
@@ -161,8 +158,8 @@ top_tps = df.sort_values('tps').tail(10)
 top_dps = df.sort_values('dps').tail(10)
 
 # Setting colors to highlight Koufax
-colors1 = ['b' if x.startswith('koufa') else 'lightgrey' for x in top_tps.playeryear]
-colors2 = ['b' if x.startswith('koufa') else 'lightgrey' for x in top_dps.playeryear]
+colors1 = ['#3366ff' if x.startswith('koufa') else 'lightgrey' for x in top_tps.playeryear]
+colors2 = ['#3366ff' if x.startswith('koufa') else 'lightgrey' for x in top_dps.playeryear]
 
 def label_bars(ax):
     """Add value labels to the bars (instead of an x-axis)."""
