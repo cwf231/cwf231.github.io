@@ -104,6 +104,7 @@ fig, ax = plt.subplots(figsize=(12, 8))
 ax = sns.scatterplot(x='year', y='dps', data=top2_df, ax=ax)
 
 ax.set_title('DPS')
+
 for year in top2_df.year.unique():
     y1 = top2_df[top2_df['year'] == year]['dps'].iloc[0]
     y2 = top2_df[top2_df['year'] == year]['dps'].iloc[1]
