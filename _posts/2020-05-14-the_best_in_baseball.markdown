@@ -32,7 +32,7 @@ The overall goal is simple: Create a metric which compares a pitcher’s overall
 
 Let's code some visualizations:
 
-```
+```python
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -42,7 +42,7 @@ import seaborn as sns
 
 To start, let's just have a look at the breakdown year-by-year of our **TPS** stat.
 
-```
+```python
 # Boxplot for each year in the dataset.
 
 fig, ax = plt.subplots(figsize=(12, 8))
@@ -66,7 +66,7 @@ Each year, the majority of the league is in the same cluster. What's most intere
 What I wanted to look at next was the **league-leader** and the second-finisher in TPS.
 
 For this, I concatinated a list of dataframes - each one with the top two TPS per year.
-```
+```python
 # Create df of top two TPS per year.
 df_lst = [df[df['year'] == year].sort_values('tps', ascending=False).head(2) for year in df.year.unique()]
 top2_df = pd.concat(df_lst)
@@ -74,7 +74,7 @@ top2_df = pd.concat(df_lst)
 
 And now we can have a look at the `top2_df`.
 
-```
+```python
 # Plot the difference between the top two TPS per year.
 
 fig, ax = plt.subplots(figsize=(12, 8))
@@ -98,7 +98,7 @@ This is starting to get interesting. This shows the metric I wanted to quantify.
 
 Now, let's put these lines up against each other to compare **DPS** (how dominant a pitcher was compared to the next-best).
 
-```
+```python
 fig, ax = plt.subplots(figsize=(12, 8))
 
 ax = sns.scatterplot(x='year', y='dps', data=top2_df, ax=ax)
@@ -128,7 +128,7 @@ ax.legend(avg_line, ['Mean DPS']);
 
 Now, let's get a sense of the top performers of DPS since 1955.
 
-```
+```python
 # Sample plot of the top 10 DPS.
 
 fig, ax = plt.subplots(figsize=(12,8))
@@ -152,7 +152,7 @@ Interesting. Sandy Koufax appears several times...
 
 If we look at the top 10 **DPS** and the top 10 **TPS**, we can see how good Koufax was in his career. 
 
-```
+```python
 # Sorting tps / dps with tail because barh charts blot bottom-to-top.
 top_tps = df.sort_values('tps').tail(10)
 top_dps = df.sort_values('dps').tail(10)
