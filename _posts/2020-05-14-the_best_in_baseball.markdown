@@ -57,7 +57,7 @@ ax.set_xlabel('Years (1955-2015)')
 ax.set_title('"The Pitching Stat"');
 ```
 
-<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/boxtps.png?token=AN7SXVEQN6QFXSRM2TF7MGK6XU7ZY">
+<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/boxtps.png">
 
 Each year, the majority of the league is in the same cluster. What's most interesting about this stat will be the outlires.
 
@@ -94,7 +94,7 @@ ax.set_title('Difference In TPS per Year')
 ax.legend_.remove()
 ```
 
-<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/tpsdiff.png?token=AN7SXVD5M35PUQJEOVLEWLC6XVA7M">
+<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/tpsdiff.png">
 
 This is starting to get interesting. This shows the metric I wanted to quantify.
 
@@ -125,7 +125,7 @@ for spine in ax.spines:
 ax.legend(avg_line, ['Mean DPS']);
 ```
 
-<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/dpslollipop.png?token=AN7SXVGPOZZ3I6T44TCT6FC6XVBMO">
+<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/dpslollipop.png">
 
 ---
 
@@ -148,7 +148,7 @@ ax.get_yaxis().set_visible(False)
 fig.autofmt_xdate();
 ```
 
-<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/top10dps.png?token=AN7SXVERNKGQKIPWZ6BRB426XVBW6">
+<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/top10dps.png">
 
 Interesting. Sandy Koufax appears several times...
 
@@ -181,7 +181,7 @@ for ax in (ax1, ax2):
         ax.spines[spine].set_visible(False)
 ```
 
-<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/koufax.png?token=AN7SXVA62G4P2XXXFVY3XXK6XVCDO">
+<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/koufax.png">
 
 ---
 
