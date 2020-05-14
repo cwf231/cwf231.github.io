@@ -191,6 +191,8 @@ for ax in (ax1, ax2):
     
     for spine in ax1.spines:
         ax.spines[spine].set_visible(False)
+		
+		label_bars(ax)
 ```
 
 <img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/koufax.png">
