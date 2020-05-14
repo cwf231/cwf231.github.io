@@ -167,7 +167,6 @@ colors1 = ['#3366ff' if player.startswith('koufa') else 'lightgrey'
 colors2 = ['#3366ff' if player.startswith('koufa') else 'lightgrey' 
            for player in top_dps.playeryear]
 
-# A function to add the bar labels.
 def label_bars(ax):
     """Add value labels to the bars (instead of an x-axis)."""
     
