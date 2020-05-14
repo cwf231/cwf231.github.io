@@ -43,13 +43,13 @@ import seaborn as sns
 To start, let's just have a look at the breakdown year-by-year of our **TPS** stat.
 
 ```
-# Boxplot for each year in the dataset.
+*# Boxplot for each year in the dataset.*
 
 fig, ax = plt.subplots(figsize=(12, 8))
 
 ax = sns.boxplot(x='year', y='tps', data=df)
 
-# Cleanup some of the extra stuff.
+*# Cleanup some of the extra stuff.*
 ax.get_yaxis().set_visible(False)
 ax.get_xaxis().set_ticks([])
 
@@ -67,15 +67,15 @@ What I wanted to look at next was the **league-leader** and the second-finisher 
 
 For this, I concatinated a list of dataframes - each one with the top two TPS per year.
 ```
-# Create df of top two TPS per year
+*# Create df of top two TPS per year*
 df_lst = [df[df['year'] == year].sort_values('tps', ascending=False).head(2) for year in df.year.unique()]
 top2_df = pd.concat(df_lst)
 ```
 
-And now we can have a look at the`top2_df`.
+And now we can have a look at the `top2_df`.
 
 ```
-# Plot the difference between the top two TPS per year.
+*# Plot the difference between the top two TPS per year.*
 
 fig, ax = plt.subplots(figsize=(12, 8))
 
@@ -129,7 +129,7 @@ ax.legend(avg_line, ['Mean DPS']);
 Now, let's get a sense of the top performers of DPS since 1955.
 
 ```
-# Sample plot of the top 10 DPS.
+*# Sample plot of the top 10 DPS.*
 
 fig, ax = plt.subplots(figsize=(12,8))
 
@@ -153,30 +153,30 @@ Interesting. Sandy Koufax appears several times...
 If we look at the top 10 **DPS** and the top 10 **TPS**, we can see how good Koufax was in his career. 
 
 ```
-# Sorting tps / dps with tail because barh charts blot bottom-to-top.
+*# Sorting tps / dps with tail because barh charts blot bottom-to-top.*
 top_tps = df.sort_values('tps').tail(10)
 top_dps = df.sort_values('dps').tail(10)
 
-# Setting colors to highlight Koufax
+*# Setting colors to highlight Koufax*
 colors1 = ['#3366ff' if x.startswith('koufa') else 'lightgrey' for x in top_tps.playeryear]
 colors2 = ['#3366ff' if x.startswith('koufa') else 'lightgrey' for x in top_dps.playeryear]
 
 def label_bars(ax):
     """Add value labels to the bars (instead of an x-axis)."""
     
-    # Iterate over the rectangle objects that we've charted.
+    *# Iterate over the rectangle objects that we've charted.*
     for rect in ax.patches:
-        # Determine the placement of the labels.
+        *# Determine the placement of the labels.*
         x_val = rect.get_width()
         y_val = rect.get_y() + rect.get_height() / 2
         label = round(rect.get_width() / 10000, 2)
         
-        # Create annotation
+        *# Create annotation*
         ax.annotate(label, (x_val, y_val), xytext=(0, 0), 
                      textcoords="offset points", 
                      va='center', ha='right')
 
-# Plot the figure.
+*# Plot the figure.*
 fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(16, 8))
 fig.subplots_adjust(wspace=.3)
 
