@@ -26,7 +26,7 @@ The overall goal is simple: Create a metric which compares a pitcher’s overall
 
 * After that, we implement the *real* stat (also unimaginatively): **DPS** (Dominant Pitching Stat). This would compare the top TPS in each season to the second-best. The higher a player’s DPS in a season, the better they were than *every* other pitcher in the game. 
 
-(Note that unlike WAR (Wins Against Replacement), we aren’t comparing to the league average, we’re comparing to the other great players in the league to see who really stood out the most.)
+(Note that unlike WAR (Wins Above Replacement), we aren’t comparing to the league average, we’re comparing to the other great players in the league to see who really stood out the most.)
 
 ---
 
@@ -58,7 +58,7 @@ ax.set(title='"The Pitching Stat"', xlabel='Years (1955-2015)')
 
 <img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/images/boxtps.png">
 
-Each year, the majority of the league is in the same cluster. What's most interesting about this stat will be the outlires.
+Each year, the majority of the league is in the same cluster. What's most interesting about this stat will be the outliers.
 
 ---
 
