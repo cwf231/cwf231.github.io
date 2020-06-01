@@ -173,7 +173,7 @@ for column in columns:
         rank = int(line.find('strong').text.split('.')[0])
         name = line.find('a').text
 				
-				top_100_boys_names[rank] = name
+        top_100_boys_names[rank] = name
 ```
 
 ***
