@@ -26,6 +26,7 @@ def scrape_for_names():
     """Scrape familyeducation.com webpage for most popular boys names."""
     
     # Create a Response from requests.
+		
     url = 'https://www.familyeducation.com/baby-names/popular-names/boys'
     r = requests.get(url)
     
@@ -33,15 +34,19 @@ def scrape_for_names():
         return 'Failed to get a response.'
     
     # Create a 'soup' from BeautifulSoup.
+		
     soup = BeautifulSoup(r.content)
     
     names_container = soup.find('section', id='block-boytopnames')
 
     # The names appear in two columns.
+		
     # Compile a list of the two columns.
+		
     columns = names_container.findAll('ul')
 
     # Loop through both columns and create a dictionary of rank and name.
+		
     top_100_boys_names = {}
     for column in columns:
         lines = column.findAll('li')
@@ -73,6 +78,7 @@ First of all, we import our two libraries, **requests and bs4** (actually we onl
 
 ```python
 # Create a Response from requests.
+
 url = 'https://www.familyeducation.com/baby-names/popular-names/boys'
 r = requests.get(url)
 ```
@@ -95,6 +101,7 @@ https://ogp.me/ns#">\n    <'`
 
 ```python
 # Create a 'soup' from BeautifulSoup.
+
 soup = BeautifulSoup(r.content)
 ```
 
@@ -128,11 +135,14 @@ From this view, we can find all the tags, classes, and ids that we need.
 
 ```python
 # Use soup's method to find the block where the boys names are listed.
+
 names_container = soup.find('section', id='block-boytopnames')
 
 # The names appear in two columns.
 
+
 # Compile a list of the two columns.
+
 columns = names_container.findAll('ul')
 ```
 
