@@ -39,6 +39,7 @@ def scrape_for_names():
     
     names_container = soup.find('section', id='block-boytopnames')
 
+
     # The names appear in two columns.
 		
     # Compile a list of the two columns.
