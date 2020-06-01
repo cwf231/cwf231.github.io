@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Template for Web Scraping - BeautifulSoup"
-date:       2020-06-01 12:53:34 +0000
+date:       2020-06-01 08:53:34 -0400
 permalink:  template_for_web_scraping_-_beautifulsoup
 ---
 
