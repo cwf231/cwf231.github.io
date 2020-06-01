@@ -10,7 +10,7 @@ Before I had much practice in it, *web-scraping* was one of the more intimidatin
 
 But like anything else, a little practice makes it seem much simpler. Much of the documentation is somewhat longwinded for an absolute beginner, so let's check out the basics.
 
-### Web-Scraping Walkthrough
+## Web-Scraping Walkthrough
 
 Today, let's look at a function which scrapes a url for the *Top 100 Baby Names for Boys*.
 
@@ -64,9 +64,9 @@ def scrape_for_names():
 ***
 
 
-#### Let's go into detail of what's happening here.
+## Let's go into detail of what's happening here.
 
-#### 1
+### 1
 
 ```python
 import requests
@@ -75,7 +75,7 @@ from bs4 import BeautifulSoup
 
 First of all, we import our two libraries, **requests and bs4** (actually we only need *BeautifulSoup* from bs4, so we don't need to import the whole thing).
 
-#### 2
+### 2
 
 ```python
 # Create a Response from requests.
@@ -98,7 +98,7 @@ r = requests.get(url)
 https://ogp.me/ns#">\n    <'`
 
 ***
-#### 3
+### 3
 
 ```python
 # Create a 'soup' from BeautifulSoup.
@@ -132,7 +132,7 @@ From this view, we can find all the tags, classes, and ids that we need.
 
 ***
 
-#### 4
+### 4
 
 ```python
 # Use soup's method to find the block where the boys names are listed.
@@ -155,7 +155,7 @@ You can pass in the html tag that you want (eg: `'div'`, `'ul'`, `'h1'`, etc) as
 
 ***
 
-#### 5
+### 5
 
 
 **At this point**, all that's left is to loop through each column and get all the names from another `BeautifulSoup.findAll()`. I decided to save them into a dictionary for this example.
@@ -195,8 +195,8 @@ Each line is simple:
 *Sifting through the `<a>` is essentially the same. We can pull out the text with `line.find('a').text`*
 
 ***
-#### 6
-#### And...we're done!
+### 6
+## And...we're done!
 
 `top_100_boys_names`
 
