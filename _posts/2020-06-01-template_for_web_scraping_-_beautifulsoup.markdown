@@ -168,7 +168,7 @@ for column in columns:
 
 `lines` returns a list of `li` tags, as before.
 
-```
+```python
     for line in lines:
         rank = int(line.find('strong').text.split('.')[0])
         name = line.find('a').text
