@@ -198,7 +198,7 @@ Each line is simple:
 ### 6
 ## And...we're done!
 
-`top_100_boys_names`
+`scrape_for_names()`
 
 returns
 
