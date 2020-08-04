@@ -63,9 +63,9 @@ pd.plotting.scatter_matrix(df, figsize=(12,12))
 ```
 <img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/blog_imgs/5scattermatrix.PNG">
 
-At a glance, we can see a lot of correlation with these variables just by the scatterplot. There are many ways we could transform the data to suit our needs, but for now we'll leave it alone and check out the raw correlations.
+At a glance, we can see the correlation values with these variables just by the scatterplot. There are many ways we could transform the data to suit our needs, but for now we'll leave it alone and check out the raw correlations.
 
-One way to do this is with a heatmap. Seaborn as a nice one:
+One way to do this is with a heatmap. Seaborn has a nice one:
 ```python
 fig, ax = plt.subplots(figsize=(8,6))
 
@@ -88,7 +88,7 @@ fig.tight_layout()
 ```
 <img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/blog_imgs/6corr_matrix.PNG">
 
-Indeed, there are some obviously high correlations here. There are many opinions of what does *high correlation* exactly mean. We can say without argument that all the relationships which are higher than `0.75` in this case are highly correlated.
+Indeed, there are some obviously high correlations here. There are many opinions of what does *high correlation* mean exactly. We can say without argument that all the relationships which are higher than `0.75` in this case are highly correlated. (High correlation coefficients are sometimes as `0.70`. )
 
 We can also see this in a dataframe:
 ```python
@@ -137,7 +137,7 @@ cc_df
 
 Now, one way to deal with multicolinearity is to adjust this matrix until nothing is highly correlated (removing variables). There *is* another way however: `variance_inflation_factor()` from `statsmodels`.
 
-- Here is the (very thin) documentation: https://www.statsmodels.org/stable/generated/statsmodels.stats.outliers_influence.variance_inflation_factor.html
+- Here is the (very thin) documentation: <a>https://www.statsmodels.org/stable/generated/statsmodels.stats.outliers_influence.variance_inflation_factor.html</a>
 
 Here's the simple functionality:
 - It takes a two-dimentional array as its first argument (**not** a dataframe) and a column index as its second argument.
@@ -183,7 +183,7 @@ vif_dct
 
 Uh oh, this is very bad. Anything more than 5 is bad, and my lowest is over 60...
 
-Well, it turns out there is an open issue on the subject (here: https://github.com/statsmodels/statsmodels/issues/2376) stating (importantly) that there needs to be a constant included in the array in order for the function to work properly.
+Well, it turns out there is an open issue on the subject (here: <a>https://github.com/statsmodels/statsmodels/issues/2376</a>) stating (importantly) that there needs to be a constant included in the array in order for the function to work properly.
 
 So, let's try again...
 ```python
