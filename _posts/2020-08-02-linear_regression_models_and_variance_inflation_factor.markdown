@@ -194,7 +194,9 @@ const_X = sm.add_constant(X)
 vif_dct = {}
 
 for i in range(1, len(const_X.columns)): # Excluding 'const' column.
+
     vif = variance_inflation_factor(const_X.values, i) # Check VIF for col[i]
+		
     v = const_X.columns[i]
     vif_dct[v] = vif
 
