@@ -248,7 +248,7 @@ There isn't an exact answer, but one way is to find out which variable, among th
 ```python
 df[correlated + ['mpg']].corr().abs()['mpg']
 ```
-<img src="https://github.com/cwf231/dominant_pitcher/blob/master/blog_imgs/16corr_with_target.PNG">
+<img src="https://raw.githubusercontent.com/cwf231/dominant_pitcher/master/blog_imgs/16corr_with_target.PNG">
 
 This would point to us using `weight` for our model.
 
