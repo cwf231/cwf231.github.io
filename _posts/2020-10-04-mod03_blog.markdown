@@ -10,7 +10,9 @@ When facing a classification problem with ML, it is common to have a **class imb
 (Documentation: [imblearn.over_sampling](https://imbalanced-learn.readthedocs.io/en/stable/api.html#module-imblearn.over_sampling))
 
 Let's have a look at the impact of a distribution imbalance.
+
 ***
+
 ```python
 # Import libraries
 
