@@ -1,33 +1,191 @@
 ---
 layout: post
-title:      "Mod03 Blog"
+title:      "Synthetic Data Points"
 date:       2020-10-04 13:47:21 -0400
 permalink:  mod03_blog
 ---
 
 
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
-The content of your blog post goes here.
+When facing a classification problem with ML, it is common to have a **class imbalance problem** -  where one of the classes is very under-represented. *SMOTE* is a tool (from `imblearn`) that creates synthetic data points in order to balance the class distribution.
+(Documentation: [imblearn.over_sampling](https://imbalanced-learn.readthedocs.io/en/stable/api.html#module-imblearn.over_sampling))
+
+Let's have a look at the impact of a distribution imbalance.
+***
+```python
+# Import libraries
+
+from sklearn.svm import SVC
+
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_classification
+from sklearn import metrics
+
+from imblearn.over_sampling import SMOTE, SMOTENC
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+plt.style.use(['ggplot', 'seaborn-talk'])
+
+# Define helper functions.
+
+def headerize(string, character='*', max_len=80):
+    """
+    Return a given string with a box (of given character) around it.
+    """
+    if max_len:
+        # Create uniform size boxes for headers with centered text.
+				
+        if len(string) > max_len-2:
+            string = string[:max_len-5] + '...'
+            
+        total_space = max_len - 2 - len(string)
+        left = total_space // 2
+        if total_space % 2 == 0:
+            right = left
+        else:
+            right = left + 1
+        
+        top = character * 80
+        mid = f'{character}{" " * left}{string}{" " * right}{character}'
+        bot = top
+    else:
+        # Create modular header boxes depending on the length of the string.
+				
+        top = character * (len(f'{string}')+42)
+        mid = f'{character}{" " * 20}{string}{" " * 20}{character}'
+        bot = top
+        
+    return f'{top}\n{mid}\n{bot}'
+
+
+def show_metrics(model, train_data_lst, X_test, y_test):
+    fig_roc, ax_roc = plt.subplots(figsize=(8, 8))
+    fig_conf, ax_conf_lst = plt.subplots(ncols=3, figsize=(12, 4))
+    
+    for (X_train, y_train, label), ax in zip(train_data_lst, ax_conf_lst):
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        
+        # Print Classification Report & show confusion matrix.
+				
+        print(headerize(label))
+        print(metrics.classification_report(y_test, y_pred))
+        metrics.plot_confusion_matrix(model, X_test, y_test, 
+                                      normalize='true', cmap='Reds', ax=ax)
+        ax.set(title=label)
+        ax.grid(False)
+        
+        # Plot ROC-Curve.
+				
+        metrics.plot_roc_curve(model, X_test, y_test, name=label, ax=ax_roc)
+    ax_roc.set(title='Receiving Operator Characteristic (ROC)')
+    ax_roc.plot([0,1], [0,1], ls=':', color='blue')
+    
+    fig_conf.tight_layout()
+    fig_roc.tight_layout()
+    plt.show()
+```
+
+Our first step is creating a dataset:
+```python
+FEATS = 6
+R_STATE = 5
+X_COL_NAMES = [f'f{n}' for n in range(FEATS)]
+
+X, y = make_classification(n_samples=5000,
+                           n_features=FEATS,
+                           n_informative=FEATS,
+                           n_redundant=0,
+                           n_clusters_per_class=3,
+                           weights=[0.1, 0.9],
+                           random_state=R_STATE)
+
+# Add two categorical columns.
+
+np.random.seed(R_STATE)
+X[:, -2:] = np.random.randint(2, size=(5000, 2))
+
+X = pd.DataFrame(X, columns=X_COL_NAMES)
+y = pd.Series(y, name='target')
+```
+
+```
+>> X.shape, y.shape
+((5000, 6), (5000,))
+```
+
+```python
+df = pd.concat([X, y], axis=1)
+```
+
+```
+>> df['target'].value_counts()
+1    4476
+0     524
+Name: target, dtype: int64
+```
+
+```python
+sns.pairplot(df, vars=X_COL_NAMES, hue='target')
+```
+<img src='https://raw.githubusercontent.com/cwf231/dsc-mod-3-project-v2-1-onl01-dtsc-pt-041320/master/blog_imgs/pairplot.png'>
+
+***
+
+Our data is ready. You can see that there are 4476 samples with a label `1` and only 524 samples with a label `0`. We are going to see how this affects our model's performance.
+
+```python
+# Perform train_test_split for validation.
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+# Prepare two training sets - with SMOTE and SMOTENC
+
+# SMOTE sample.
+
+smote_original = SMOTE(random_state=R_STATE)
+X_smote, y_smote = smote_original.fit_resample(X_train, y_train)
+
+# SMOTENC sample.
+
+smote_nc = SMOTENC(categorical_features=[4,5], random_state=R_STATE)
+X_smote_nc, y_smote_nc = smote_nc.fit_resample(X_train, y_train)
+```
+
+Plotting the distributions of the new target variables, we can see that SMOTE does not treat our binary variables as categorical, but continuous.
+
+```
+X_smote[['f4', 'f5']].hist(figsize=(8,4))
+```
+<img src='https://raw.githubusercontent.com/cwf231/dsc-mod-3-project-v2-1-onl01-dtsc-pt-041320/master/blog_imgs/smote_hist.png'>
+```
+X_smote_nc[['f4', 'f5']].hist(figsize=(8,4))
+```
+<img src='https://raw.githubusercontent.com/cwf231/dsc-mod-3-project-v2-1-onl01-dtsc-pt-041320/master/blog_imgs/smotenc_hist.png'>
+
+***
+
+Now we can compare the metrics of a model that is trained by these three different methods.
+```python
+all_data = [
+    (X_train, y_train, 'Original Data'),
+    (X_smote, y_smote, 'SMOTE Resampling'),
+    (X_smote_nc, y_smote_nc, 'SMOTENC Resampling'),
+]
+
+# Create SVC model.
+
+svc = SVC(random_state=R_STATE)
+
+show_metrics(svc, all_data, X_test, y_test)
+```
+<img src='https://raw.githubusercontent.com/cwf231/dsc-mod-3-project-v2-1-onl01-dtsc-pt-041320/master/blog_imgs/reports.PNG'>
+<img src='https://raw.githubusercontent.com/cwf231/dsc-mod-3-project-v2-1-onl01-dtsc-pt-041320/master/blog_imgs/conf.png'>
+<img src='https://raw.githubusercontent.com/cwf231/dsc-mod-3-project-v2-1-onl01-dtsc-pt-041320/master/blog_imgs/roc.png'>
+***
+As you can see, this particular model when trained on unbalanced data had a recall of 0.05 for the minority class. While its `accuracy` was good, it was only good because it over-guessed the `1` class.
+
+All of the *macro_* and *weighted_* metrics are greatly improved because of the number of minority class- classifications that have been improved.
